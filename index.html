@@ -46,8 +46,6 @@
       position: absolute;
       top: 20px;
       left: 20px;
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
     }
 
     button {
@@ -91,9 +89,9 @@
         width: 40px;
       }
 
-      .top-left {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.75rem;
+      button.top-left {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
       }
     }
   </style>
@@ -114,6 +112,13 @@
   </footer>
 
   <script>
+
+    if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js')
+    .then(reg => console.log('Service Worker registered', reg))
+    .catch(err => console.error('Service Worker registration failed', err));
+}
+
     const timezoneInfo = document.getElementById("timezone-info");
     const activeEvent = document.getElementById("active-event");
     const countdown = document.getElementById("countdown");
