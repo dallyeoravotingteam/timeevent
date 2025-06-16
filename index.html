@@ -131,20 +131,23 @@
 
     function updateCountdown(kstNow) {
       nextEventsDiv.innerHTML = "";
-      for (const event of eventWindows) {
+      const upcoming = eventWindows.map(event => {
         const [h, m] = event.start.split(":");
         const startDate = new Date(kstNow);
         startDate.setHours(+h, +m, 0);
         const diff = startDate - kstNow;
-        if (diff > 0) {
-          const mins = Math.floor((diff / 1000 / 60) % 60);
-          const hrs = Math.floor((diff / 1000 / 60 / 60));
-          const countdownText = `${event.name} starts in ${hrs}h ${mins}m`;
-          const p = document.createElement("div");
-          p.className = "countdown-line";
-          p.textContent = countdownText;
-          nextEventsDiv.appendChild(p);
-        }
+        return diff > 0 ? { diff, event } : null;
+      }).filter(e => e !== null).sort((a, b) => a.diff - b.diff);
+
+      if (upcoming.length > 0) {
+        const { diff, event } = upcoming[0];
+        const totalSecs = Math.floor(diff / 1000);
+        const hrs = Math.floor(totalSecs / 3600);
+        const mins = Math.floor((totalSecs % 3600) / 60);
+        const secs = totalSecs % 60;
+        countdown.textContent = `Next: ${event.name} in ${hrs}h ${mins}m ${secs}s`;
+      } else {
+        countdown.textContent = "No upcoming events today.";
       }
     }
 
@@ -177,7 +180,7 @@
       updateCountdown(kstNow);
     }
 
-    setInterval(checkEvents, 60000);
+    setInterval(checkEvents, 1000);
     checkEvents();
   </script>
 </body>
