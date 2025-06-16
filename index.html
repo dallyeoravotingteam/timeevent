@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Time Event Notifications</title>
-  <link rel="manifest" href="manifest.json">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
@@ -47,6 +46,8 @@
       position: absolute;
       top: 20px;
       left: 20px;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
     }
 
     button {
@@ -90,9 +91,9 @@
         width: 40px;
       }
 
-      button.top-left {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
+      .top-left {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
       }
     }
   </style>
@@ -113,13 +114,6 @@
   </footer>
 
   <script>
-
-    if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js')
-    .then(reg => console.log('Service Worker registered', reg))
-    .catch(err => console.error('Service Worker registration failed', err));
-}
-
     const timezoneInfo = document.getElementById("timezone-info");
     const activeEvent = document.getElementById("active-event");
     const countdown = document.getElementById("countdown");
@@ -151,6 +145,7 @@
       { start: "13:45", end: "14:45", name: "CHINESE TE 1 ⏳01:45PM - 02:45PM KST" },
       { start: "18:30", end: "19:30", name: "KOREAN/JAPANESE/VIETNAMESE TE 2 ⏳06:30PM - 07:30PM KST" },
       { start: "19:30", end: "20:30", name: "CHINESE TE 2 ⏳07:30PM - 08:30PM KST" },
+      { start: "21:30", end: "21:40", name: "TRIAL TE ⏳09:30PM - 09:40PM KST" },
       { start: "22:50", end: "23:50", name: "ENGLISH TE 2 ⏳10:50PM - 11:50PM KST" }
     ];
 
